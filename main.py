@@ -69,8 +69,8 @@ clock = time.Clock()
 #sounds~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mixer.init()
 mixer.music.load(open("music.ogg"))
-#collision_sound = mixer.Sound("collision.ogg")
-#lose_sound = mixer.Sound("lose.ogg")
+#collision_sound = mixer.Sound("collide.ogg") - тут ошибка
+#lose_sound = mixer.Sound("lose.ogg") - и тут тоже 
 mixer.music.play()
 #font~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 font.init()
