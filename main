@@ -1,0 +1,43 @@
+import pygame
+
+class GameSprite(sprite.Sprite):
+    def __init__(self,sizex, sizey, pImage,sped,xcor,ycor):
+        super().__init__()
+        self.xSize = sizex
+        self.ySize = sizey
+        self.image = transform.scale(image.load(pImage),(self.xSize,self.ySize))
+        self.speed = sped
+        self.rect = self.image.get_rect()
+        self.rect.x = xcor
+        self.rect.y = ycor
+    def show(self):
+        wind.blit(self.image, (self.rect.x, self.rect.y))
+
+class Player2(GameSprite):
+    def walking(self):
+        keys_pressed = key.get_pressed()
+        if keys_pressed[K_RIGHT] and self.rect.x < 625:
+            self.rect.x += self.speed
+        if keys_pressed[K_LEFT] and self.rect.x > 25:
+            self.rect.x -= self.speed
+
+class Player1(GameSprite):
+    def walking(self):
+        keys_pressed = key.get_pressed()
+        if keys_pressed[K_RIGHT] and self.rect.x < 625:
+            self.rect.x += self.speed
+        if keys_pressed[K_LEFT] and self.rect.x > 25:
+            self.rect.x -= self.speed
+
+class Ball(GameSprite):
+  def move(self):
+    pass
+
+game = True
+
+while game:
+  pass
+
+
+
+            
