@@ -1,2 +1,2 @@
 # Ping-PongGame
-Game
+Ping-Pong game, that was made with python. 
