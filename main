@@ -1,7 +1,9 @@
-import pygame
+from pygame import *
+#vars~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+#classes~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 class GameSprite(sprite.Sprite):
-    def __init__(self,sizex, sizey, pImage,sped,xcor,ycor):
+    def __init__(self,sizex, sizey, pImage,sped,xcor,ycor, up_key, down_key):
         super().__init__()
         self.xSize = sizex
         self.ySize = sizey
@@ -10,35 +12,61 @@ class GameSprite(sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = xcor
         self.rect.y = ycor
+        self.key_up = up_key
+        self.key_down = down_key
     def show(self):
         wind.blit(self.image, (self.rect.x, self.rect.y))
 
-class Player2(GameSprite):
-    def __init__(self, left_key, right_key):
-        super().__init__()
-        self.key_left = left_key
-        self.key_right = right_key
+class Player(GameSprite):
     def walking(self):
         keys_pressed = key.get_pressed()
-        if keys_pressed[left_key] and self.rect.x < 625:
-            self.rect.x += self.speed
-        if keys_pressed[right_key] and self.rect.x > 25:
-            self.rect.x -= self.speed
+        if keys_pressed[self.left_key] and self.rect.x < 775:
+            self.rect.y += self.speed
+        if keys_pressed[self.right_key] and self.rect.x > 25:
+            self.rect.y -= self.speed
 
 class Ball(GameSprite):
-  def move(self):
-    pass
-
-win_h = 700; win_w = 500
+    def move(self):
+        pass
+#window~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+win_h = 800; win_w = 600
 wind = display.set_mode((win_h,win_w))
 display.set_caption("Space Shooter")
-bg = transform.scale(image.load("galaxy.jpg"), (win_h, win_w))
+bg = transform.scale(image.load("bg.png"), (win_h, win_w))
 clock = time.Clock()
-
-game = True
+#sounds~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mixer.init()
+mixer.music.load("space.ogg")
+collision_sound = mixer.Sound("collision.ogg")
+loose_sound = mixer.Sound("loose.ogg")
+mixer.music.play()
+font.init()
+defaultFont = font.SysFont("Arial", 64)
+#sprites~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+player1 = Player(25,100, None,4,50,400,Key_q,Key_a)
+player1 = Player(25,100, None,4,50,400,Key_o,Key_l)
+ball =  Ball(25,25,None,2,400,300,None,None)
+#cycle~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+game = True; finish = False
 while game:
-  pass
+    for e in event.get():
+        if e.type == QUIT:
+            game = False
+    if finish != True: 
+        wind.blit(bg,(0,0))
+        lose1 = defaultFont.render("player1 is winner",1,(0,0,255))
+        lose2 = defaultFont.render("player2 is winner",1,(0,0,255))
+        player1.show(); player1.walking()
+        player2.show(); player2.walking()
+        ball.show(); ball.move()
+        if sprite.spritecollide(playerrr, monsters, False):
+            pass
+        if ball.rect.x >= 0: 
+            wind.blit(lose1,(400,300))
+        if ball.rect.x >= 800:
+            wind.blit(lose2,(400,300))      
+    else:
+        finish = False
+        clock.tick(10000)
 
-
-
-            
+    display.update(); clock.tick(60)
