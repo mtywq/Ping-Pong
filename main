@@ -1,6 +1,6 @@
 from pygame import *
 #vars~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+speed_x = self.sped; speed_y = self.sped
 #classes~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 class GameSprite(sprite.Sprite):
     def __init__(self,sizex, sizey, pImage,sped,xcor,ycor, up_key, down_key):
