@@ -58,8 +58,10 @@ class Ball(GameSprite):
         self.rect.y -= self.speed_y
         if self.rect.y >= 0:
             self.speed_y = -self.speed_y
+            #collide_sound.play()
         if self.rect.y <= 575:
             self.speed_y = -self.speed_y
+            #collide_sound.play()
 #window~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 win_h = 800; win_w = 600
 wind = display.set_mode((win_h,win_w))
@@ -69,7 +71,7 @@ clock = time.Clock()
 #sounds~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mixer.init()
 mixer.music.load(open("music.ogg"))
-#collision_sound = mixer.Sound("collide.ogg") - тут ошибка
+#collide_sound = mixer.Sound("collide.ogg") - тут ошибка
 #lose_sound = mixer.Sound("lose.ogg") - и тут тоже 
 mixer.music.play()
 #font~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -95,13 +97,17 @@ while game:
         sphere.show(); sphere.move()
         if player1.rect.colliderect(sphere):
             sphere.speed_x *= -1
+            #collide_sound.play()
         if player2.rect.colliderect(sphere):
             sphere.speed_x *= -1
+            #collide_sound.play()
         if sphere.rect.x <= 0: 
             wind.blit(lose1,(215,270))
+            #lose_sound.play()
             finish = True
         if sphere.rect.x >= 800:
             wind.blit(lose2,(215,270))
+            #lose_sound.play()
             finish = True      
     else:
         finish = False
