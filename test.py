@@ -178,7 +178,7 @@ while game:
     else: 
         if choosen:
             new_vector()
-            save_stat()
+            #save_stat() #test func
             finish = False
             plsyer1_csore = 0; plsyer2_csore = 0
             sphere.kill(); sphere =  Ball(50,50,"ball.png",2,400,300)   
